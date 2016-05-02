@@ -17,8 +17,7 @@ login:
    - "5000:5000"
   volumes:
    - ./configs/login-wrio-app/:/srv/config
-  command:
-   - cd /srv/www && cp /srv/config/config.json . && node server.js
+  command: bash -c "cd /srv/www && cp /srv/config/config.json . && node server.js"
 
 titter:
   image: michbil/titter-wrio-app
@@ -26,6 +25,7 @@ titter:
    - "5001:5001"
   volumes:
    - ./configs/titter-wrio-app/:/srv/config
+  command: bash -c "cd /srv/www && cp /srv/config/config.json . && node server.js"
 
 storage:
   image: michbil/storage-wrio-app
@@ -33,6 +33,7 @@ storage:
    - "5002:5002"
   volumes:
     - ./configs/storage-wrio-app/:/srv/config
+  command: bash -c "cd /srv/www && cp /srv/config/config.json . && node server.js"
 
 webgold:
   image: michbil/webgold-wrio-app
@@ -40,6 +41,8 @@ webgold:
    - "5003:5003"
   volumes:
     - ./configs/webgold-wrio-app/:/srv/config
+  command: bash -c "cd /srv/www && cp /srv/config/config.json . && node server.js"
+
 
 #chess:
 #  build: ./Chess-WRIO-Game/
@@ -56,4 +59,5 @@ core:
    - "5004:5004"
   volumes:
   - ./configs/core-wrio-app/:/srv/config
+  command: bash -c "cd /srv/www && cp /srv/config/config.json . && node server.js"
 
