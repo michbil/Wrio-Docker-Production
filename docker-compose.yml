@@ -41,7 +41,7 @@ webgold:
    - "5003:5003"
   volumes:
     - ./configs/webgold-wrio-app/:/srv/config
-  command: bash -c "cd /srv/www && cp /srv/config/config.json . && node server.js"
+  command: bash -c "cd /srv/www && gulp && cp /srv/config/config.json . && node server.js"
 
 
 #chess:
