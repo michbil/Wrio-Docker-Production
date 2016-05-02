@@ -1,5 +1,4 @@
 
-
 apache:
   build: ./apache/
   ports:
@@ -12,67 +11,30 @@ apache:
    - dev
    - core
 
-#   - chess
-
-#ambassador:
-#  image: cpuguy83/docker-grand-ambassador
-#  volumes:
-#    - "/var/run/docker.sock:/var/run/docker.sock"
-#  command: "-wait=true -name apache"
-
-#dnsdock:
- #   image: tonistiigi/dnsdock
- #   volumes:
- #       - /var/run/docker.sock:/run/docker.sock
- #   ports:
- #       - 172.17.42.1:53:53/udp
-
-
-dev:
-  build: .
-  ports:
-  - "3000:3000"
-  volumes:
-   - .:/srv/www/
-  extra_hosts:
-     - "titter.wrioos.local:10.211.55.3"
-     - "login.wrioos.local:10.211.55.3"
 
 login:
-  build: ./Login-WRIO-App/
+  image: michbil/login-wrio-app
   ports:
    - "5000:5000"
   volumes:
    - ./Login-WRIO-App/:/srv/www/
-  extra_hosts:
-   - "titter.wrioos.local:10.211.55.3"
-   - "storage.wrioos.local:10.211.55.3"
-   - "webgold.wrioos.local:10.211.55.3"
-
 
 titter:
-  build: ./Titter-WRIO-App/
+  image: michbil/titter-wrio-app
   ports:
    - "5001:5001"
   volumes:
    - ./Titter-WRIO-App/:/srv/www/
-  extra_hosts:
-    - "titter.wrioos.local:10.211.55.3"
-    - "login.wrioos.local:10.211.55.3"
-    - "webgold.wrioos.local:10.211.55.3"
 
 storage:
-  build: ./Storage-WRIO-App/
+  image: michbil/storage-wrio-app
   ports:
    - "5002:5002"
   volumes:
    - ./Storage-WRIO-App/:/srv/www/
-  extra_hosts:
-    - "titter.wrioos.local:10.211.55.3"
-    - "login.wrioos.local:10.211.55.3"
 
 webgold:
-  build: ./webGold-WRIO-App/
+  image: michbil/webgold-wrio-app
   ports:
    - "5003:5003"
   volumes:
@@ -88,7 +50,7 @@ webgold:
 #    - titter
 
 core:
-  build: ./Core-WRIO-App/
+  image: michbil/core-wrio-app
   ports:
    - "5004:5004"
   volumes:
