@@ -3,6 +3,8 @@ apache:
   build: ./apache/
   ports:
    - "80:80"
+  restart: always
+
   links:
    - titter
    - login
@@ -10,11 +12,11 @@ apache:
    - webgold
    - core
 
-
 login:
   image: michbil/login-wrio-app
   ports:
    - "5000:5000"
+  restart: always
   volumes:
    - ./configs/login-wrio-app/:/srv/config
   command: bash -c "cd /srv/www && cp /srv/config/config.json . && node server.js"
@@ -23,6 +25,7 @@ titter:
   image: michbil/titter-wrio-app
   ports:
    - "5001:5001"
+  restart: always
   volumes:
    - ./configs/titter-wrio-app/:/srv/config
   command: bash -c "cd /srv/www && cp /srv/config/config.json . && node server.js"
@@ -31,6 +34,7 @@ storage:
   image: michbil/storage-wrio-app
   ports:
    - "5002:5002"
+  restart: always
   volumes:
     - ./configs/storage-wrio-app/:/srv/config
   command: bash -c "cd /srv/www && cp /srv/config/config.json . && node server.js"
@@ -39,6 +43,9 @@ webgold:
   image: michbil/webgold-wrio-app
   ports:
    - "5003:5003"
+  restart: always
+  links:
+  - ethereum
   volumes:
     - ./configs/webgold-wrio-app/:/srv/config
   command: bash -c "cd /srv/www && gulp && cp /srv/config/config.json . && node server.js"
@@ -57,7 +64,17 @@ core:
   image: michbil/core-wrio-app
   ports:
    - "5004:5004"
+  restart: always
   volumes:
   - ./configs/core-wrio-app/:/srv/config
   command: bash -c "cd /srv/www && gulp && cp /srv/config/config.json . && node server.js"
 
+ethereum:
+  image: ethereum/client-go
+  ports:
+   - "30303:30303"
+   - "8545:8545"
+  volumes:
+   - "./ethdata/:/root/.ethereum"
+  command:
+   - bash -c "geth --rpc --rpcaddr 0.0.0.0"
