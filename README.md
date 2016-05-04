@@ -28,3 +28,15 @@ TODO: investigate using https://github.com/CenturyLinkLabs/watchtower for restar
 При успешном билде Travis нам надо запускать билд на Docker hub. 
 Основная задача это заставить инстанс автоматически запускать свежие образы сделанные dockerhub. 
 ```
+
+# To start docker in the backgroud
+
+```
+docker-compose up --no-deps -d
+```
+
+to see the logs
+
+```
+docker-compose
+```

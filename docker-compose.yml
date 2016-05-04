@@ -48,7 +48,7 @@ webgold:
   - ethereum
   volumes:
     - ./configs/webgold-wrio-app/:/srv/config
-  command: bash -c "cd /srv/www && gulp && cp /srv/config/config.json . && node server.js"
+  command: bash -c "cd /srv/www && cp /srv/config/config.json . && node server.js"
 
 
 #chess:
@@ -67,7 +67,7 @@ core:
   restart: always
   volumes:
   - ./configs/core-wrio-app/:/srv/config
-  command: bash -c "cd /srv/www && gulp && cp /srv/config/config.json . && node server.js"
+  command: bash -c "cd /srv/www && cp /srv/config/config.json . && node server.js"
 
 ethereum:
   image: ethereum/client-go
