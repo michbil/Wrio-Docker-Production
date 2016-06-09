@@ -84,3 +84,5 @@ webhooks:
   image: bketelsen/captainhook
   volumes:
   - ./hooks/:/config
+  ports:
+     - "8080:5005"
