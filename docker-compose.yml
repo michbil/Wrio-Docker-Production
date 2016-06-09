@@ -85,4 +85,4 @@ webhooks:
   volumes:
   - ./hooks/:/config
   ports:
-     - "8080:5005"
+     - "5005:8080"
