@@ -1,19 +1,19 @@
 
-apache:
-  build: ./apache/
-  ports:
-   - "80:80"
-  restart: always
+#apache:
+#  build: ./apache/
+#  ports:
+#   - "80:80"
+#  restart: always#
 
-  links:
-   - titter
-   - login
-   - storage
-   - webgold
-   - core
+#  links:
+#   - titter
+#   - login
+#   - storage
+#   - webgold
+#   - core
 
 login:
-  image: michbil/login-wrio-app
+  image: webrunes/login-wrio-app
   ports:
    - "5000:5000"
   restart: always
@@ -22,7 +22,7 @@ login:
   command: bash -c "cd /srv/www && cp /srv/config/config.json . && node server.js"
 
 titter:
-  image: michbil/titter-wrio-app
+  image: webrunes/titter-wrio-app
   ports:
    - "5001:5001"
   restart: always
@@ -31,7 +31,7 @@ titter:
   command: bash -c "cd /srv/www && cp /srv/config/config.json . && node server.js"
 
 storage:
-  image: michbil/storage-wrio-app
+  image: webrunes/storage-wrio-app
   ports:
    - "5002:5002"
   restart: always
@@ -40,12 +40,12 @@ storage:
   command: bash -c "cd /srv/www && cp /srv/config/config.json . && node server.js"
 
 webgold:
-  image: michbil/webgold-wrio-app
+  image: webrunes/webgold-wrio-app
   ports:
    - "5003:5003"
   restart: always
-  links:
-  - ethereum
+#  links:
+#  - ethereum
   volumes:
     - ./configs/webgold-wrio-app/:/srv/config
   command: bash -c "cd /srv/www && cp /srv/config/config.json . && node server.js"
@@ -61,7 +61,7 @@ webgold:
 #    - titter
 
 core:
-  image: michbil/core-wrio-app
+  image: webrunes/core-wrio-app
   ports:
    - "5004:5004"
   restart: always
@@ -69,12 +69,18 @@ core:
   - ./configs/core-wrio-app/:/srv/config
   command: bash -c "cd /srv/www && cp /srv/config/config.json . && node server.js"
 
-ethereum:
-  image: ethereum/client-go
-  ports:
-   - "30303:30303"
-   - "8545:8545"
+#ethereum:
+#  image: ethereum/client-go
+#  ports:
+#   - "30303:30303"
+#   - "8545:8545"
+#  volumes:
+#   - "./ethdata/:/root/.ethereum"
+#  command:
+#   - bash -c "geth --rpc --rpcaddr 0.0.0.0"
+
+
+webhooks:
+  image: https://github.com/bketelsen/captainhook
   volumes:
-   - "./ethdata/:/root/.ethereum"
-  command:
-   - bash -c "geth --rpc --rpcaddr 0.0.0.0"
+  - ./hooks/:/config
