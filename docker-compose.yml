@@ -81,6 +81,6 @@ core:
 
 
 webhooks:
-  image: https://github.com/bketelsen/captainhook
+  image: bketelsen/captainhook
   volumes:
   - ./hooks/:/config
