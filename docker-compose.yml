@@ -28,7 +28,7 @@ titter:
   restart: always
   volumes:
    - ./configs/titter-wrio-app/:/srv/config
-  command: bash -c "cd /srv/www && cp /srv/config/config.json .  && node server.js"
+  command: bash -c "cd /srv/www && cp /srv/config/config.json . && node server.js"
 
 storage:
   image: webrunes/storage-wrio-app
@@ -44,8 +44,8 @@ webgold:
   ports:
    - "5003:5003"
   restart: always
-#  links:
-#  - ethereum
+  links:
+  - ethereum
   volumes:
     - ./configs/webgold-wrio-app/:/srv/config
   command: bash -c "cd /srv/www && cp /srv/config/config.json . && node server.js"
@@ -76,8 +76,7 @@ ethereum:
    - "8545:8545"
   volumes:
    - "./ethdata/:/root/.ethereum"
-  command:
-   - bash -c "geth --rpc --rpcaddr 0.0.0.0"
+  command: --rpc --rpcaddr "0.0.0.0"
 
 
 webhooks:
@@ -85,4 +84,6 @@ webhooks:
   volumes:
   - ./hooks/:/config
   ports:
-     - "8080:8080"
+     - "8081:8081"
+  command: bash -c "echo 123 && app -listen-addr 0.0.0.0:8081 -configdir /config"
+
