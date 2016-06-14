@@ -87,5 +87,6 @@ webhooks:
   - "./:/compose"
   ports:
      - "8081:8081"
+  privileged: true
   command: bash -c "echo 123 && app -listen-addr 0.0.0.0:8081 -configdir /config"
 
