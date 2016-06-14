@@ -84,6 +84,7 @@ webhooks:
   volumes:
   - ./hooks/:/config
   - /var/lib/docker:/var/lib/docker
+  - /var/run/docker.sock:/var/run/docker.sock
   - "./:/compose"
   ports:
      - "8081:8081"
