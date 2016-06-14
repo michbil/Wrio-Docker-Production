@@ -38,5 +38,11 @@ docker-compose up --no-deps -d
 to see the logs
 
 ```
-docker-compose
+docker-compose logs
+```
+
+To update service to newer image
+
+```
+docker-compose up -d --no-deps service
 ```
