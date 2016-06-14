@@ -80,9 +80,11 @@ ethereum:
 
 
 webhooks:
-  image: bketelsen/captainhook
+  build: ./hooks/
   volumes:
   - ./hooks/:/config
+  - /var/lib/docker:/var/lib/docker
+  - "./:/compose"
   ports:
      - "8081:8081"
   command: bash -c "echo 123 && app -listen-addr 0.0.0.0:8081 -configdir /config"
